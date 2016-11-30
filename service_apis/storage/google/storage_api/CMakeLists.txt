@@ -26,3 +26,22 @@ target_link_libraries(google_storage_api googleapis_http)
 target_link_libraries(google_storage_api googleapis_internal)
 target_link_libraries(google_storage_api googleapis_jsoncpp)
 target_link_libraries(google_storage_api googleapis_utils)
+
+set(STORAGE_API_INSTALL_INCLUDE_DIR
+    ${GOOGLEAPIS_INSTALL_BASE_DIR}/include/google/storage_api)
+
+install(FILES
+bucket.h
+bucket_access_control.h
+bucket_access_controls.h
+buckets.h
+channel.h
+compose_request.h
+object.h
+object_access_control.h
+object_access_controls.h
+objects.h
+rewrite_response.h
+storage_api.h
+storage_service.h
+DESTINATION ${STORAGE_API_INSTALL_INCLUDE_DIR})
