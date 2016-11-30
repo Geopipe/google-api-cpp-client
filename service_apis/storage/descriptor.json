@@ -1,0 +1,38 @@
+{
+  "kind": "discovery#directoryItem", 
+  "id": "storage:v1", 
+  "name": "storage", 
+  "version": "v1", 
+  "title": "Cloud Storage JSON API", 
+  "description": "Stores and retrieves potentially large, immutable data objects.", 
+  "discoveryRestUrl": "https://www.googleapis.com/discovery/v1/apis/storage/v1/rest", 
+  "discoveryLink": "./apis/storage/v1/rest", 
+  "icons": {
+    "x16": "https://www.google.com/images/icons/product/cloud_storage-16.png", 
+    "x32": "https://www.google.com/images/icons/product/cloud_storage-32.png"
+  }, 
+  "documentationLink": "https://developers.google.com/storage/docs/json_api/", 
+  "labels": [
+    "labs"
+  ], 
+  "preferred": true, 
+  "packagePath": null, 
+  "canonicalName": null, 
+  "files": [
+    {
+      "downloadUrl": "/downloads/storage/v1/92/cpp/0.1.4/google-storage-v1-rev92-cpp-0.1.4-doc.zip", 
+      "path": "google-storage-v1-rev92-cpp-0.1.4-doc.zip", 
+      "type": "documentation", 
+      "timestamp": "2016-11-18 01:59"
+    }, 
+    {
+      "downloadUrl": "/downloads/storage/v1/92/cpp/0.1.4/google-storage-v1-rev92-cpp-0.1.4-src.zip", 
+      "path": "", 
+      "type": "source", 
+      "timestamp": "2016-11-18 01:59"
+    }
+  ], 
+  "revision": 92, 
+  "language": "cpp", 
+  "language_version": "0.1.4"
+}
