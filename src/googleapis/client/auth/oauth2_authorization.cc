@@ -47,8 +47,13 @@ using std::string;
 //   2) I want to keep JsonCppData decoupled so I can easily replace the
 //      data model. Currently JsonCppData is introduced by the code generator
 //      and not by the core runtime library.
+#ifdef __APPLE__
 #include <json/reader.h>
 #include <json/value.h>
+#else  // linux
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/value.h>
+#endif  // #ifdef __APPLE__
 
 #include "googleapis/strings/join.h"
 #include "googleapis/strings/numbers.h"

@@ -24,8 +24,13 @@ using std::string;
 #include "googleapis/client/data/jsoncpp_data.h"
 #include "googleapis/client/util/status.h"
 #include <glog/logging.h>
+#ifdef __APPLE__
 #include <json/reader.h>
 #include <json/writer.h>
+#else  // linux
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/writer.h>
+#endif  // #ifdef __APPLE__
 
 namespace googleapis {
 

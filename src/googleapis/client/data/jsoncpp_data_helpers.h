@@ -29,7 +29,11 @@ using std::string;
 #include "googleapis/client/util/date_time.h"
 #include "googleapis/base/integral_types.h"
 #include "googleapis/strings/numbers.h"
+#ifdef __APPLE__
 #include <json/json.h>
+#else  // linux
+#include <jsoncpp/json/json.h>
+#endif  // #ifdef __APPLE__
 namespace googleapis {
 
 namespace client {

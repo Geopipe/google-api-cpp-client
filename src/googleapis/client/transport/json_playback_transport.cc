@@ -39,8 +39,13 @@ using std::string;
 #include "googleapis/base/mutex.h"
 #include "googleapis/strings/strcat.h"
 #include "googleapis/strings/stringpiece.h"
+#ifdef __APPLE__
 #include <json/reader.h>
 #include <json/value.h>
+#else  // linux
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/value.h>
+#endif  // #ifdef __APPLE__
 
 namespace googleapis {
 

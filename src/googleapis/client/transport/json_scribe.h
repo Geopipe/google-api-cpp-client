@@ -27,8 +27,13 @@ using std::string;
 
 #include "googleapis/client/transport/http_scribe.h"
 #include "googleapis/base/integral_types.h"
+#ifdef __APPLE__
 #include <json/value.h>
 #include <json/writer.h>
+#else  // linux
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/writer.h>
+#endif  // #ifdef __APPLE__
 namespace googleapis {
 
 namespace client {

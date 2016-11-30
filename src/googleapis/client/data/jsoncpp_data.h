@@ -44,7 +44,11 @@ using std::string;
 #include "googleapis/client/data/serializable_json.h"
 #include "googleapis/client/data/jsoncpp_data_helpers.h"
 #include "googleapis/base/macros.h"
+#ifdef __APPLE__
 #include <json/json.h>
+#else  // linux
+#include <jsoncpp/json/json.h>
+#endif  // #ifdef __APPLE__
 namespace googleapis {
 
 namespace client {

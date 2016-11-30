@@ -26,8 +26,13 @@
 #include "googleapis/client/transport/json_scribe.h"
 #include "googleapis/client/util/date_time.h"
 #include "googleapis/strings/numbers.h"
+#ifdef __APPLE__
 #include <json/value.h>
 #include <json/writer.h>
+#else  // linux
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/writer.h>
+#endif  // #ifdef __APPLE__
 
 namespace googleapis {
 
