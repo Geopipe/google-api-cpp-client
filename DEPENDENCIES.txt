@@ -1,0 +1,4 @@
+glog
+gflags
+curl
+jsoncpp
