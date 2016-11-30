@@ -55,6 +55,8 @@ else()
   set(CMAKE_STANDARD_LIBRARIES ${CMAKE_STANDARD_LIBRARIES} pthread)
 endif()
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # This may not work on windows.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 if (CMAKE_COMPILER_IS_GNUCXX)
