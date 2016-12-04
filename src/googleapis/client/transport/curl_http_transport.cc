@@ -189,8 +189,6 @@ class CurlProcessor {
   googleapis::util::Status InitStandardOptions() {
     bool ok = true;
     ok = ok && !curl_easy_setopt(
-        curl_, CURLOPT_VERBOSE, 1L);
-    ok = ok && !curl_easy_setopt(
         curl_, CURLOPT_HEADERFUNCTION, ResultHeaderCallback);
     ok = ok && !curl_easy_setopt(curl_, CURLOPT_WRITEHEADER, this);
     ok = ok && !curl_easy_setopt(
@@ -208,6 +206,10 @@ class CurlProcessor {
     }
 
     const HttpTransportOptions& options = transport_->options();
+    if (options.verbose_level() != 0) {
+      ok = ok && !curl_easy_setopt(curl_, CURLOPT_VERBOSE,
+                                   options.verbose_level());
+    }
     if (!options.proxy_host().empty()) {
       ok = ok && !curl_easy_setopt(
           curl_, CURLOPT_PROXY, options.proxy_host().c_str());

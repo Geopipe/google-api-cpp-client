@@ -306,7 +306,8 @@ HttpTransportOptions::HttpTransportOptions()
       connect_timeout_ms_(0L),
       executor_(nullptr),
       callback_executor_(nullptr),
-      error_handler_(nullptr) {
+      error_handler_(nullptr),
+      verbose_(0) {
   string app_name = DetermineDefaultApplicationName();
   user_agent_ = BuildStandardUserAgentString(app_name);
 

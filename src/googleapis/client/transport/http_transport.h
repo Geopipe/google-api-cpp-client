@@ -424,6 +424,10 @@ class HttpTransportOptions {
    */
   void set_connect_timeout_ms(const int64 connect_timeout_ms);
 
+  // YANG: get verbosity level (for debugging)
+  void set_verbose_level(int verbose) { this->verbose_ = verbose; }
+  int verbose_level() const { return this->verbose_; }
+
   /*
    * An identifier used to declare this client library within the User-Agent.
    */
@@ -489,6 +493,9 @@ class HttpTransportOptions {
    * Not owned. NULL means no error handling.
    */
   const HttpTransportErrorHandler* error_handler_;
+
+  // YANG: verbosity level
+  int verbose_;
 };
 
 
