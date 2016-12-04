@@ -189,6 +189,8 @@ class CurlProcessor {
   googleapis::util::Status InitStandardOptions() {
     bool ok = true;
     ok = ok && !curl_easy_setopt(
+        curl_, CURLOPT_VERBOSE, 1L);
+    ok = ok && !curl_easy_setopt(
         curl_, CURLOPT_HEADERFUNCTION, ResultHeaderCallback);
     ok = ok && !curl_easy_setopt(curl_, CURLOPT_WRITEHEADER, this);
     ok = ok && !curl_easy_setopt(
