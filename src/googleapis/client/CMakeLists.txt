@@ -29,6 +29,7 @@ add_library(googleapis_utils STATIC
             data/data_writer.cc
             data/composite_data_reader.cc
             data/file_data_reader.cc
+            data/file_data_writer.cc
             data/inmemory_data_reader.cc
             data/istream_data_reader.cc
             util/date_time.cc
