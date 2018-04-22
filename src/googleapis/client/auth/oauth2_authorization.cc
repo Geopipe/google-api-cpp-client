@@ -18,6 +18,7 @@
  */
 
 
+#include <fstream>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -122,9 +123,13 @@ string OAuth2AuthorizationFlow::SimpleJsonData::InitFromContainer(
 }
 bool OAuth2AuthorizationFlow::SimpleJsonData::GetString(
     const char* field_name, string* value) const {
-  if (!json_.isMember(field_name)) return false;
-
-  *value = json_[field_name].asString();
+  if (!json_.isObject())
+    return false;
+  Json::Value nullValue;
+  Json::Value result = json_.get(field_name, nullValue);
+  if (!result)
+    return false;
+  *value = result.asString();
   return true;
 }
 bool OAuth2AuthorizationFlow::SimpleJsonData::GetScalar(
@@ -143,6 +148,7 @@ bool OAuth2AuthorizationFlow::SimpleJsonData::GetBool(
 }
 bool OAuth2AuthorizationFlow::SimpleJsonData::GetFirstArrayElement(
     const char* field_name, string* value) const {
+  if (!json_.isArray()) return false;
   if (!json_.isMember(field_name)) return false;
 
   Json::Value array = json_[field_name];
@@ -278,6 +284,7 @@ util::Status OAuth2Credential::AuthorizeRequest(HttpRequest* request) {
   if (!access_token_.empty()) {
     string bearer = "Bearer ";
     access_token_.AppendTo(&bearer);
+    VLOG(4) << HttpRequest::HttpHeader_AUTHORIZATION << ": " << bearer;
     request->AddHeader(HttpRequest::HttpHeader_AUTHORIZATION, bearer);
   }
   return StatusOk();
@@ -678,6 +685,15 @@ string OAuth2AuthorizationFlow::JoinScopes(
 }
 
 // static
+OAuth2AuthorizationFlow* OAuth2AuthorizationFlow::MakeFlowFromClientSecretsPath(
+    const string& path, HttpTransport* transport,
+    googleapis::util::Status* status) {
+  string json(std::istreambuf_iterator<char>(std::ifstream(path).rdbuf()),
+              std::istreambuf_iterator<char>());
+  return MakeFlowFromClientSecretsJson(json, transport, status);
+}
+
+// static
 OAuth2AuthorizationFlow*
 OAuth2AuthorizationFlow::MakeFlowFromClientSecretsJson(
     const string& json,
@@ -718,10 +734,9 @@ OAuth2AuthorizationFlow::MakeFlowFromClientSecretsJson(
 
 util::Status OAuth2AuthorizationFlow::InitFromJson(const string& json) {
   SimpleJsonData data;
-  string root_name = data.InitFromContainer(json);
-  if (root_name.empty()) {
-    return StatusInvalidArgument("Invalid JSON");
-  }
+  util::Status status = data.Init(json);
+  if (!status.ok())
+    return status;
 
   return InitFromJsonData(&data);
 }
@@ -733,20 +748,25 @@ util::Status OAuth2AuthorizationFlow::InitFromJsonData(
   string value;
   if (data->GetString("client_id", &value)) {
     spec->set_client_id(value);
+    VLOG(4) << "client_id: " << value;
   }
   if (data->GetString("client_secret", &value)) {
     spec->set_client_secret(value);
+    char secret_chars[] = { value[0], value[1], value[2], value[3], 0 };
+    VLOG(4) << "client_secret: " << secret_chars << "...";
   }
   if (data->GetString("auth_uri", &value)) {
     spec->set_auth_uri(value);
+    VLOG(4) << "auth_uri: " << value;
   }
   if (data->GetString("token_uri", &value)) {
     spec->set_token_uri(value);
+    VLOG(4) << "token_uri: " << value;
   }
   if (data->GetFirstArrayElement("redirect_uris", &value)) {
     spec->set_redirect_uri(value);
+    VLOG(4) << "redirect_uri: " << value;
   }
-
   return StatusOk();
 }
 

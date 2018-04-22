@@ -1,4 +1,4 @@
-# This is a CMake file for Cloud Storage JSON API v1
+# This is a CMake file for YouTube Data API v3
 # using the Google APIs Client Library for C++.
 #
 # See http://google.github.io/google-api-cpp-client/latest/start/get_started

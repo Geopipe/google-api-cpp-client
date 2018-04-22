@@ -16,16 +16,29 @@ add_library(google_storage_api STATIC
             buckets.cc
             channel.cc
             compose_request.cc
+<<<<<<< HEAD
+=======
+            notification.cc
+            notifications.cc
+>>>>>>> upstream/master
             object.cc
             object_access_control.cc
             object_access_controls.cc
             objects.cc
+<<<<<<< HEAD
             rewrite_response.cc
+=======
+            policy.cc
+            rewrite_response.cc
+            service_account.cc
+            test_iam_permissions_response.cc
+>>>>>>> upstream/master
             storage_service.cc)
 target_link_libraries(google_storage_api googleapis_http)
 target_link_libraries(google_storage_api googleapis_internal)
 target_link_libraries(google_storage_api googleapis_jsoncpp)
 target_link_libraries(google_storage_api googleapis_utils)
+<<<<<<< HEAD
 
 set(STORAGE_API_INSTALL_INCLUDE_DIR
     ${GOOGLEAPIS_INSTALL_BASE_DIR}/include/google/storage_api)
@@ -45,3 +58,5 @@ rewrite_response.h
 storage_api.h
 storage_service.h
 DESTINATION ${STORAGE_API_INSTALL_INCLUDE_DIR})
+=======
+>>>>>>> upstream/master
