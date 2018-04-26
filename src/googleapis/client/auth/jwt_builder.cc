@@ -156,7 +156,7 @@ util::Status JwtBuilder::MakeJwtUsingEvp(
 
   googleapis::util::Status status;
   std::unique_ptr<EVP_MD_CTX, void(*)(EVP_MD_CTX*)>
-                  ctx(EVP_MD_CTX_create(), &EVP_MD_CTX_destroy);
+                  ctx(EVP_MD_CTX_new(), &EVP_MD_CTX_free);
   EVP_SignInit(ctx.get(), EVP_sha256());
   EVP_SignUpdate(ctx.get(), data_to_sign.c_str(), data_to_sign.size());
 

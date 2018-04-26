@@ -1,10 +1,10 @@
 cmake_minimum_required (VERSION 2.6)
 project (GoogleApis_C++)
 
-if(EXISTS "${CMAKE_BINARY_DIR}/local.cmake")
-	include("${CMAKE_BINARY_DIR}/local.cmake")
+if(EXISTS "./local.cmake")
+include("local.cmake")
 endif()
-	
+
 set(googleapis_VERSION_MAJOR 0)
 set(googleapis_VERSION_MINOR 2)
 set(googleapis_VERSION_PATCH 0)
@@ -36,7 +36,6 @@ endif()
 
 find_package(Threads)
 find_package(gflags)
-find_package(glog)
 
 if (MSVC)
   option(gtest_force_shared_crt "Force Gmock to use standard compiler flags" ON)
