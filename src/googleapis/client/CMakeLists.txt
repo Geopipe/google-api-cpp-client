@@ -63,7 +63,7 @@ install(FILES auth/oauth2_pending_authorizations.h
 add_library(googleapis_jsoncpp STATIC data/jsoncpp_data.cc)
 target_link_libraries(googleapis_jsoncpp googleapis_json)
 target_link_libraries(googleapis_jsoncpp googleapis_utils)
-target_link_libraries(googleapis_jsoncpp jsoncpp)
+target_link_libraries(googleapis_jsoncpp ${JSONCPP_LIBRARY})
 target_link_libraries(googleapis_jsoncpp googleapis_internal)
 install(TARGETS googleapis_jsoncpp DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 install(FILES data/jsoncpp_data.h
@@ -126,7 +126,7 @@ target_link_libraries(googleapis_jsonplayback googleapis_http)
 target_link_libraries(googleapis_jsonplayback googleapis_scribes)
 target_link_libraries(googleapis_jsonplayback googleapis_utils)
 target_link_libraries(googleapis_jsonplayback googleapis_internal)
-target_link_libraries(googleapis_jsonplayback jsoncpp)
+target_link_libraries(googleapis_jsonplayback ${JSONCPP_LIBRARY})
 install(TARGETS googleapis_jsonplayback
         DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 install(FILES transport/json_playback_transport.h
@@ -137,7 +137,7 @@ add_library(googleapis_oauth2 STATIC auth/oauth2_authorization.cc auth/oauth2_se
 target_link_libraries(googleapis_oauth2 ${GLOG_LIBRARY})
 target_link_libraries(googleapis_oauth2 googleapis_http)
 target_link_libraries(googleapis_oauth2 googleapis_internal)
-target_link_libraries(googleapis_oauth2 jsoncpp)
+target_link_libraries(googleapis_oauth2 ${JSONCPP_LIBRARY})
 install(TARGETS googleapis_oauth2 DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 install(FILES auth/oauth2_authorization.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client/auth)

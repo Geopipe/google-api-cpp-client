@@ -273,7 +273,7 @@ util::Status JsonPlaybackTranscript::Load(DataReader* reader) {
   Json::Value journal;
   Json::Reader json_reader;
   if (!json_reader.parse(json, journal)) {
-return StatusUnknown(json_reader.getFormatedErrorMessages());
+return StatusUnknown(json_reader.getFormattedErrorMessages());
   }
 
   if (journal.isMember(JsonScribe::kMaxSnippet)) {
