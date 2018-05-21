@@ -12,10 +12,14 @@ set(googleapis_VERSION_DECORATOR "devel")
 
 enable_testing()
 
+foreach(lang C CXX)
+	set(CMAKE_${lang}_STANDARD_REQUIRED ON)
+	set(CMAKE_${lang}_STANDARD 11)
+endforeach()
+
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_INSTALL_PREFIX "export")
-set(GOOGLEAPIS_INSTALL_BASE_DIR ${CMAKE_BINARY_DIR})
+set(GOOGLEAPIS_INSTALL_BASE_DIR ${CMAKE_INSTALL_PREFIX})
 set(GOOGLEAPIS_INSTALL_LIB_DIR ${GOOGLEAPIS_INSTALL_BASE_DIR}/lib)
 set(GOOGLEAPIS_INSTALL_INCLUDE_DIR
     ${GOOGLEAPIS_INSTALL_BASE_DIR}/include/googleapis)
@@ -57,9 +61,10 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # This may not work on windows.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
+  add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 endif()
 
 include_directories(

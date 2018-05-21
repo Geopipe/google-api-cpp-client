@@ -10,7 +10,7 @@ MESSAGE("Storage API included")
 # These sources assume that the CMakeLists.txt in ../.. added itself to
 # the include directories so that include paths are specified explicitly
 # with the directory #include "google/storage_api/..."
-add_library(google_storage_api STATIC
+add_library(google_storage_api
             bucket.cc
             bucket_access_control.cc
             bucket_access_controls.cc
@@ -56,3 +56,5 @@ storage_api.h
 test_iam_permissions_response.h
 storage_service.h
 DESTINATION ${STORAGE_API_INSTALL_INCLUDE_DIR})
+
+install(TARGETS google_storage_api DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})

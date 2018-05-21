@@ -9,7 +9,7 @@ project (google_wax_api)
 # These sources assume that the CMakeLists.txt in ../.. added itself to
 # the include directories so that include paths are specified explicitly
 # with the directory #include "google/wax_api/..."
-add_library(google_wax_api STATIC
+add_library(google_wax_api
             subscription.cc
             wax_create_session_request.cc
             wax_data_item.cc

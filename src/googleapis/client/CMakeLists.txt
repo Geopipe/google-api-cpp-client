@@ -12,7 +12,7 @@ configure_file(data/roots.pem ${EXECUTABLE_OUTPUT_PATH}/roots.pem COPYONLY)
 # Libraries should use this where possible so actual implementation libraries
 # are decoupled. This potentially allows different service libraries to have
 # different json implementations for their data objects in the same binary.
-add_library(googleapis_json STATIC data/serializable_json.cc)
+add_library(googleapis_json data/serializable_json.cc)
 target_link_libraries(googleapis_json googleapis_utils)
 target_link_libraries(googleapis_json googleapis_internal)
 install(TARGETS googleapis_json DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
@@ -22,7 +22,7 @@ install(FILES data/serializable_json.h
 # Generic utility functions supporting the core googleapis components.
 # This will combine the Data Layer and utility/programing support.
 # since there isnt a pragmatic reason to separate their runtime packaging.
-add_library(googleapis_utils STATIC
+add_library(googleapis_utils
             data/base64_codec.cc
             data/codec.cc
             data/data_reader.cc
@@ -60,7 +60,7 @@ install(FILES auth/oauth2_pending_authorizations.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client/auth)
 
 # A concrete JSON implementation using JsonCpp (external package).
-add_library(googleapis_jsoncpp STATIC data/jsoncpp_data.cc)
+add_library(googleapis_jsoncpp data/jsoncpp_data.cc)
 target_link_libraries(googleapis_jsoncpp googleapis_json)
 target_link_libraries(googleapis_jsoncpp googleapis_utils)
 target_link_libraries(googleapis_jsoncpp ${JSONCPP_LIBRARY})
@@ -73,7 +73,7 @@ install(FILES data/jsoncpp_data.h
 # The TransportLayer and ClientServiceLayer components of the
 # googleapis libraries. This also includes generic Authorization components
 # but not OAuth 2.0 specific components.
-add_library(googleapis_http STATIC
+add_library(googleapis_http
             auth/credential_store.cc
             auth/file_credential_store.cc
             transport/ca_paths.cc
@@ -110,7 +110,7 @@ install(FILES service/client_service.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client/service)
 
 # Concrete scribe implementations.
-add_library(googleapis_scribes STATIC
+add_library(googleapis_scribes
             transport/html_scribe.cc
             transport/json_scribe.cc)
 target_link_libraries(googleapis_scribes googleapis_utils)
@@ -120,7 +120,7 @@ install(FILES transport/html_scribe.h
               transport/json_scribe.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client/transport)
 
-add_library(googleapis_jsonplayback STATIC
+add_library(googleapis_jsonplayback
             transport/json_playback_transport.cc)
 target_link_libraries(googleapis_jsonplayback googleapis_http)
 target_link_libraries(googleapis_jsonplayback googleapis_scribes)
@@ -133,7 +133,7 @@ install(FILES transport/json_playback_transport.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client)
 
 # Implementation of OAuth2
-add_library(googleapis_oauth2 STATIC auth/oauth2_authorization.cc auth/oauth2_service_authorization.cc auth/jwt_builder.cc)
+add_library(googleapis_oauth2 auth/oauth2_authorization.cc auth/oauth2_service_authorization.cc auth/jwt_builder.cc)
 target_link_libraries(googleapis_oauth2 ${GLOG_LIBRARY})
 target_link_libraries(googleapis_oauth2 googleapis_http)
 target_link_libraries(googleapis_oauth2 googleapis_internal)
@@ -144,7 +144,7 @@ install(FILES auth/oauth2_authorization.h
 
 if (HAVE_OPENSSL)
 # Concrete Codec implementation using OpenSSL (external package).
-add_library(googleapis_openssl_codec STATIC data/openssl_codec.cc)
+add_library(googleapis_openssl_codec data/openssl_codec.cc)
 target_link_libraries(googleapis_openssl_codec crypto)
 target_link_libraries(googleapis_openssl_codec dl)      # For crypto
 target_link_libraries(googleapis_openssl_codec googleapis_internal)
@@ -156,7 +156,7 @@ install(FILES data/openssl_codec.h
 endif()
 
 # Concrete HttpTransport implementation using Curl (external package).
-add_library(googleapis_curl_http STATIC transport/curl_http_transport.cc)
+add_library(googleapis_curl_http transport/curl_http_transport.cc)
 target_link_libraries(googleapis_curl_http ${CURL_LIBRARY})
 target_link_libraries(googleapis_curl_http ${GLOG_LIBRARY})
 target_link_libraries(googleapis_curl_http googleapis_http)
@@ -172,7 +172,7 @@ install(FILES transport/curl_http_transport.h
 
 
 if (googleapis_build_tests)
-add_library(googleapis_http_transport_test_fixture STATIC
+add_library(googleapis_http_transport_test_fixture
             transport/test/http_transport_test_fixture.cc)
 target_link_libraries(googleapis_http_transport_test_fixture googleapis_json)
 target_link_libraries(googleapis_http_transport_test_fixture googleapis_jsoncpp)
@@ -184,7 +184,7 @@ target_link_libraries(googleapis_http_transport_test_fixture ${GFLAGS_LIBRARY})
 target_link_libraries(googleapis_http_transport_test_fixture gtest)
 
 # Some gtest enhancements to facilitate test setup and cleanup.
-add_library(googleapis_gtest_main STATIC util/test/googleapis_gtest_main.cc)
+add_library(googleapis_gtest_main util/test/googleapis_gtest_main.cc)
 target_link_libraries(googleapis_gtest_main googleapis_internal)
 target_link_libraries(googleapis_gtest_main ${GLOG_LIBRARY})
 target_link_libraries(googleapis_gtest_main gtest_main)

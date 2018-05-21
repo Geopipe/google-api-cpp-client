@@ -4,7 +4,7 @@ add_subdirectory(client)
 
 # The rest of googleapis is auto-generated.
 # Really we'd like this to be part of some other external project.
-add_library(googleapis_internal STATIC
+add_library(googleapis_internal
 ./base/callback.cc
 ./base/once.cc
 ./base/strtoint.cc

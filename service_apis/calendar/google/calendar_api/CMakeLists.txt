@@ -9,7 +9,7 @@ project (google_calendar_api)
 # These sources assume that the CMakeLists.txt in ../.. added itself to
 # the include directories so that include paths are specified explicitly
 # with the directory #include "google/calendar_api/..."
-add_library(google_calendar_api STATIC
+add_library(google_calendar_api
             acl.cc
             acl_rule.cc
             calendar.cc
@@ -39,3 +39,5 @@ target_link_libraries(google_calendar_api googleapis_http)
 target_link_libraries(google_calendar_api googleapis_internal)
 target_link_libraries(google_calendar_api googleapis_jsoncpp)
 target_link_libraries(google_calendar_api googleapis_utils)
+
+install(TARGETS google_calendar_api DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
