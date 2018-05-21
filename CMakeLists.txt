@@ -15,6 +15,7 @@ enable_testing()
 foreach(lang C CXX)
 	set(CMAKE_${lang}_STANDARD_REQUIRED ON)
 	set(CMAKE_${lang}_STANDARD 11)
+	set(CMAKE_${lang}_EXTENSIONS OFF)
 endforeach()
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
