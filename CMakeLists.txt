@@ -44,6 +44,7 @@ find_package(Glog)
 find_package(GFlags)
 
 find_package(OpenSSL REQUIRED)
+message(STATUS "Found OpenSSL (${OPENSSL_VERSION}): ${OPENSSL_INCLUDE_DIR} ${OPENSSL_LIBRARIES}")
 
 if (MSVC)
   option(gtest_force_shared_crt "Force Gmock to use standard compiler flags" ON)
@@ -71,7 +72,17 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 endif()
 
+if(ISYSTEM_IS_BUGGED)
+	set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX -I)
+	set(CMAKE_INCLUDE_SYSTEM_FLAG_C -I)
+
+	message(STATUS "DISABLING BUGGY -isystem: ${CMAKE_INCLUDE_SYSTEM_FLAG_CXX}")
+endif()
+
+
 include_directories(
+	${PRE_INCLUDE_DIRS}
+	"${OPENSSL_INCLUDE_DIR}"
     "${GOOGLEAPIS_EXTERNAL_DEPENDENCIES_DIR}/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     ${CURL_INCLUDE_DIRS}
@@ -81,8 +92,6 @@ include_directories(
     ${JSONCPP_INCLUDE_DIRS}
     ${OTHER_INCLUDE_DIRS}
     )
-
-include_directories(BEFORE ${OPENSSL_INCLUDE_DIR})
 
 link_directories("${GOOGLEAPIS_EXTERNAL_DEPENDENCIES_DIR}/lib"
                  "${GOOGLEAPIS_INSTALL_LIB_DIR}")
