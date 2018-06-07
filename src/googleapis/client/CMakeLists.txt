@@ -115,6 +115,8 @@ add_library(googleapis_scribes
             transport/json_scribe.cc)
 target_link_libraries(googleapis_scribes googleapis_utils)
 target_link_libraries(googleapis_scribes googleapis_internal)
+target_link_libraries(googleapis_scribes googleapis_http)
+target_link_libraries(googleapis_scribes googleapis_jsoncpp)
 install(TARGETS googleapis_scribes DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 install(FILES transport/html_scribe.h
               transport/json_scribe.h
