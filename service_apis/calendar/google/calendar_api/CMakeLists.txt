@@ -40,4 +40,9 @@ target_link_libraries(google_calendar_api googleapis_internal)
 target_link_libraries(google_calendar_api googleapis_jsoncpp)
 target_link_libraries(google_calendar_api googleapis_utils)
 
+if(APPLE)
+            set_target_properties(google_calendar_api PROPERTIES
+                        INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif(APPLE)
+
 install(TARGETS google_calendar_api DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})

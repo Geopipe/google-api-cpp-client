@@ -172,6 +172,16 @@ endif()
 install(TARGETS googleapis_curl_http DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 install(FILES transport/curl_http_transport.h
         DESTINATION ${GOOGLEAPIS_INSTALL_INCLUDE_DIR}/client/transport)
+        
+        
+        
+
+if(APPLE)
+        set_target_properties(  googleapis_json googleapis_utils googleapis_jsoncpp
+                                googleapis_http googleapis_scribes googleapis_jsonplayback
+                                googleapis_oauth2 googleapis_curl_http PROPERTIES
+                INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif(APPLE)
 
 
 if (googleapis_build_tests)

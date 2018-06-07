@@ -33,6 +33,11 @@ target_link_libraries(google_storage_api googleapis_internal)
 target_link_libraries(google_storage_api googleapis_jsoncpp)
 target_link_libraries(google_storage_api googleapis_utils)
 
+if(APPLE)
+            set_target_properties(google_storage_api PROPERTIES
+                        INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif(APPLE)
+
 set(STORAGE_API_INSTALL_INCLUDE_DIR
     ${GOOGLEAPIS_INSTALL_BASE_DIR}/include/google/storage_api)
 

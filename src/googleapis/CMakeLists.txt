@@ -24,6 +24,12 @@ add_library(googleapis_internal
 ./util/status.cc
 )
 target_link_libraries(googleapis_internal ${GLOG_LIBRARY})
+
+if(APPLE)
+            set_target_properties(googleapis_internal PROPERTIES
+                        INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+endif(APPLE)
+
 install(TARGETS googleapis_internal DESTINATION ${GOOGLEAPIS_INSTALL_LIB_DIR})
 
 install(FILES 
