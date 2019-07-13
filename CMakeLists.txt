@@ -95,6 +95,7 @@ include_directories(
 
 link_directories("${GOOGLEAPIS_EXTERNAL_DEPENDENCIES_DIR}/lib"
                  "${GOOGLEAPIS_INSTALL_LIB_DIR}")
+set(CMAKE_INSTALL_RPATH	${GOOGLEAPIS_INSTALL_LIB_DIR})
 
 set(CMAKE_REQUIRED_INCLUDES "${GOOGLEAPIS_EXTERNAL_DEPENDENCIES_DIR}/include")
 include("introspect.cmake")
